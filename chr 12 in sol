@@ -1,0 +1,16 @@
+ssh alp923@sol.cc.lehigh.edu
+password
+srun --partition=hawkcpu --nodes =1 --ntasks-per-node=1 --time=60 --pty /bin/bash
+.libPaths("/share/ceph/wym219group/shared.libraries/R")
+module load r 
+R
+#R version 4.0.3 (2020-10-10) -- "Bunny-Wunnies Freak Out"
+#Copyright (C) 2020 The R Foundation for Statistical Computing
+#Platform: x86_64-pc-linux-gnu (64-bit)
+.libPaths("/share/ceph/wym219group/shared/libraries/R")
+library(PopGenome)
+library(rehh)
+CHR12 <-"/share/ceph/wym219group/shared/data/1000Genomes/CandidateLoci/LYZ.HC3202_chr12.68348381-70354234.vcf.gz"
+> GENOME.class <- readVCF(CHR12, numcols=1000, tid="chr12", frompos=68348381, topos=70354234, approx=FALSE, out="", parallel=FALSE,gffpath=FALSE)
+> GENOME.class <- neutrality.stats(GENOME.class)
+> get.neutrality(GENOME.class)[[1]]
